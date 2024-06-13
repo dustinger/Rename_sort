@@ -1,7 +1,5 @@
 from faker import Faker
-from information import Person, Account, Keyword
-import operations
-import sort
+from information import Person
 
 
 fake = Faker()
@@ -17,7 +15,7 @@ def fake_entities():
     acct_number = fake.swift11()
     entity = Person(first_name, last_name, spouse_first_name, spouse_last_name, False)
     entity.create_entity_folder()
-    acct = Account(company, acct_number, "Roth", entity.get_first_name(), entity.family_name())
+    acct = Account(company, acct_number, kind, first_name, family_name, status)
     acct.create_account_folder()
 
 

@@ -3,11 +3,6 @@ import csv
 import re
 
 
-# load config file for global use
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-
 class Operations:
     def __init__(self, file):
         self.file = str(file)
@@ -15,6 +10,7 @@ class Operations:
         self.correspondence_endings = 'correspondence_endings.txt'
         self.accounts = 'accounts.csv'
         self.entity = 'entity.csv'
+        self.config = configparser.ConfigParser().read('config.ini')
 
     def get_file_year(self):
 
@@ -103,7 +99,7 @@ class Operations:
         return ''
 
     def get_key_location(self):
-        with open(self.keys,'r') as f:
+        with open(self.keys, 'r') as f:
             csv_reader = csv.reader(f)
             for row in csv_reader:
                 if len(row) >= 2:  # Ensure the row has at least two columns (first and second)
@@ -113,7 +109,7 @@ class Operations:
         return False
 
     def get_keyword_year(self):
-        with open(self.keys,'r') as f:
+        with open(self.keys, 'r') as f:
             csv_reader = csv.reader(f)
             for row in csv_reader:
                 if len(row) >= 5:  # Ensure the row has at least two columns (first and second)
@@ -182,73 +178,68 @@ class Operations:
                     return True
         return False
 
+    @staticmethod
+    def log_file(message):
+        with open('log.txt', 'a') as log:
+            log.write(message)
 
-def log_file(message):
-    with open('log.txt','a') as log:
-        log.write(message)
+    @staticmethod
+    def first_entity_name():
+        ent = []
+        col1_index = 1
+        col2_index = 2
+        with open('entity.csv', 'r') as csv_ent:
+            csv_reader = csv.reader(csv_ent)
+            for row in csv_reader:
+                # Assuming col1_index and col2_index are 0-based indices
+                if len(row) > max(col1_index, col2_index):
+                    if not row[col1_index] == '':
+                        ent.append(row[col1_index].rsplit(',')[1])
+                    if not row[col2_index] == '':
+                        ent.append(row[col2_index].rsplit(',')[1])
+        ent.sort()
+        return ent
 
+    @staticmethod
+    def full_name_list():
+        ent = []
+        col1_index = 1
+        col2_index = 2
+        with open('entity.csv', 'r') as csv_ent:
+            csv_reader = csv.reader(csv_ent)
+            for row in csv_reader:
+                # Assuming col1_index and col2_index are 0-based indices
+                if len(row) > max(col1_index, col2_index):
+                    if not row[col1_index] == '':
+                        ent.append(row[col1_index])
+                    if not row[col2_index] == '':
+                        ent.append(row[col2_index])
+                ent.append(row[0])
+        ent = list(set(ent))
+        ent.sort()
+        return ent
 
-def first_entity_name():
-    ent = []
-    col1_index = 1
-    col2_index = 2
-    with open('entity.csv', 'r') as csv_ent:
-        csv_reader = csv.reader(csv_ent)
-        for row in csv_reader:
-            # Assuming col1_index and col2_index are 0-based indices
-            if len(row) > max(col1_index, col2_index):
-                if not row[col1_index] == '':
-                    ent.append(row[col1_index].rsplit(',')[1])
-                if not row[col2_index] == '':
-                    ent.append(row[col2_index].rsplit(',')[1])
-    ent.sort()
-    return ent
+    @staticmethod
+    def family_name_list():
+        ent = []
+        col1_index = 0
+        with open('entity.csv', 'r') as csv_ent:
+            csv_reader = csv.reader(csv_ent)
+            for row in csv_reader:
+                # Assuming col1_index and col2_index are 0-based indices
+                if len(row) > col1_index:
+                    if not row[col1_index] == '':
+                        ent.append(row[col1_index])
+        ent.sort()
+        return ent
 
-
-def full_name_list():
-    ent = []
-    col1_index = 1
-    col2_index = 2
-    with open('entity.csv', 'r') as csv_ent:
-        csv_reader = csv.reader(csv_ent)
-        for row in csv_reader:
-            # Assuming col1_index and col2_index are 0-based indices
-            if len(row) > max(col1_index, col2_index):
-                if not row[col1_index] == '':
-                    ent.append(row[col1_index])
-                if not row[col2_index] == '':
-                    ent.append(row[col2_index])
-            ent.append(row[0])
-    ent = list(set(ent))
-    ent.sort()
-    return ent
-
-def family_name_list():
-    ent = []
-    col1_index = 0
-
-    with open('entity.csv', 'r') as csv_ent:
-        csv_reader = csv.reader(csv_ent)
-        for row in csv_reader:
-            # Assuming col1_index and col2_index are 0-based indices
-            if len(row) > col1_index:
-                if not row[col1_index] == '':
-                    ent.append(row[col1_index])
-    ent.sort()
-    return ent
-
-
-def keywords_location_list():
-    key = []
-    col1_index = 0
-
-    with open('new_folders.txt', 'r') as csv_ent:
-        csv_reader = csv.reader(csv_ent)
-        for row in csv_reader:
-            # Assuming col1_index and col2_index are 0-based indices
-            r = str(row)
-            key.append(r)
-    return key
-
-
-print(keywords_location_list())
+    @staticmethod
+    def keywords_location_list():
+        key = []
+        with open('new_folders.txt', 'r') as csv_ent:
+            csv_reader = csv.reader(csv_ent)
+            for row in csv_reader:
+                # Assuming col1_index and col2_index are 0-based indices
+                r = str(row)
+                key.append(r)
+        return key

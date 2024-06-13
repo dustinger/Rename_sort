@@ -1,13 +1,13 @@
 import configparser
-import tkinter as tk
 from tkinter import filedialog
 
 
 def repeat_program():
     config = configparser.ConfigParser()
     config.read('config.ini')
-    setup = config.getboolean('program', 'setup')
+
     try:
+        setup = config.getboolean('program', 'setup')
         if setup:
             # Code to run if the setup has already been completed
             print("Setup has already been completed.")
@@ -45,8 +45,4 @@ def repeat_program():
         print("Error reading configuration:", e)
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.withdraw()  # Hide the main window
-
-    repeat_program()
+repeat_program()
