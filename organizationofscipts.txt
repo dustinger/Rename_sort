@@ -1,0 +1,67 @@
+ Script files
+    1. Operations
+        a. Tools
+            i. Log
+            ii. Check files
+            iii. Check folders
+            iv. Delete empty folders
+            v. Rename files
+            vi. Move files
+            vii. Search Files
+            viii. Search Folders
+            ix. Parse month from file
+            x. Parse year from file
+        b. Sort
+            i. Files
+            ii. Trade ticket
+            iii. Blotters
+    2. Information
+        a. Person (first_name, last_name, spouse_first_name, spouse_last_name, status)
+            i. Family Name
+            ii. Parse Family Name
+            iii. Create Entity Folder
+            iv. Parse Name from file
+        b. Account (custodian, accountnumb, first_name, family_name, status
+            i. Account name
+            ii. Parse account name
+            iii. Create account folder
+            iv. Parse Account from file
+        c. Keyword (Keyword, Location)
+            i. keyword
+            ii. Check keyword
+            iii. Add keywords
+            iv. Parse Keyword from file
+    3. GUI
+        a. Rename
+            i. View documents
+            ii. Uses tools
+        b. Sort
+            i. Uses tools
+        c. Create new entity
+            i. Uses Information. Person
+        d. Create new Account
+            i. Uses Information. Account
+        e. Create Keyword
+            i. Uses Information. Keyword
+    4. Config
+        a. Holds Important items to run program
+
+Documents
+    1. Entity.csv
+        a. First name
+        b. last name
+        c. status
+        d. family name
+    2. account.csv
+        a. custodian
+        b. account number
+        c. First name
+        d. family name
+        e. status
+    3. Keyword.csv
+        a. Keyword
+        b. Location
+    4. named.txt
+    5. rename.txt
+    6. config.ini
+    7. log.txt

@@ -3,7 +3,7 @@ import csv
 import re
 
 
-class Operations:
+class Tools:
     def __init__(self, file):
         self.file = str(file)
         self.keys = 'key.csv'
@@ -13,7 +13,6 @@ class Operations:
         self.config = configparser.ConfigParser().read('config.ini')
 
     def get_file_year(self):
-
         if self.file[:5].isnumeric() or self.file[:3].isalpha():
             return ''
         else:

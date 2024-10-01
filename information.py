@@ -106,11 +106,11 @@ class Account:
                 os.mkdir(closed_path)
 
     @staticmethod
-    def seperate_name(account_name):
+    def separate_name(account_name):
         company = None
         account = None
         name = None
-        pattern = r'(?P<company>[A-Za-z]+),\s(?P<account>[0-9A-Za-z]+)\s(?P<name>[0-9A-Za-z]+)'
+        pattern = r'(?P<company>[A-Za-z]+)\s(?P<account>[0-9A-Za-z]+)\s(?P<name>[0-9A-Za-z]+)'
         match = re.match(pattern, account_name)
         if match:
             groups = match.groupdict()

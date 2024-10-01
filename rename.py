@@ -14,7 +14,7 @@ class Rename:
         self.correspondence_endings = 'correspondence_endings.txt'
         self.accounts = 'accounts.csv'
         self.entity = 'entity.csv'
-        self.named_filename = 'named_files.txt'
+        self.named_filename = 'named.txt'
         self.rename_filename = 'rename_files.txt'
 
     # creates a list to rename files
